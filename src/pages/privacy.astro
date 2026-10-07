@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { release, source } from '../data/site';
+---
+
+<Base
+  title="Privacy · Ostrilo"
+  description="Ostrilo has no developer server, analytics, telemetry, or crash reporting. Learn what stays on your device and what goes to your chosen Nostr relays."
+>
+  <PageIntro label="Privacy" title="Your browser. Your data.">
+    <p>
+      The extension has no developer server and sends no analytics, telemetry, or crash reports to
+      the developer. Here’s how it handles the data you choose to use.
+    </p>
+  </PageIntro>
+  <div class="article-layout wrap">
+    <nav class="page-index" aria-label="On this page">
+      <p class="section-label">Where data goes</p>
+      <a href="#local">On your device</a>
+      <a href="#network">Relays & websites</a>
+      <a href="#website">This website</a>
+      <a href="#policy">The full policy</a>
+    </nav>
+    <div class="prose">
+      <section id="local">
+        <h2>Kept in your browser.</h2>
+        <p>
+          The encrypted key vault, public keys and labels, permissions, relay addresses, settings,
+          and activity records live in local extension storage. The browser may sync one preference:
+          whether Ostrilo opens in the side panel.
+        </p>
+        <p>
+          Private keys are encrypted. Activity records and settings are separate local data, and are
+          not encrypted like the key vault. Activity includes the site origin, event kind, decision,
+          and a content preview.
+        </p>
+      </section>
+      <section id="network">
+        <h2>Connections you can account for.</h2>
+        <p>
+          Ostrilo connects to your selected Nostr relays to fetch public profiles and publish
+          profile changes. Relays receive the queried public keys and can see your IP address. The
+          default relay is <code>wss://relay.primal.net</code>.
+        </p>
+        <p>
+          Websites receive a public key with your consent and signed events you approve or permit
+          through rules. Ostrilo returns website-requested signed events to the website. That
+          website decides where to publish them.
+        </p>
+        <p>
+          In extension {release.version}, profile images are not loaded from their remote hosts, and
+          there’s no image-upload flow. Saving an image URL as profile metadata does not cause an
+          image request from the extension.
+        </p>
+      </section>
+      <section id="website">
+        <h2>A quiet website, too.</h2>
+        <p>
+          This site contains no analytics, advertising, tracking cookies, remote fonts, or embedded
+          third-party widgets. Fonts and images are served with the site. The signing walkthrough
+          uses example data and never connects to your extension.
+        </p>
+        <p>
+          The theme switch works within the current page without storing a preference. GitHub Pages
+          hosts the website and receives ordinary web requests, including your IP address.{' '}
+          <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">
+            GitHub’s privacy statement
+          </a>{' '}
+          covers its handling of that data.
+        </p>
+        <p>
+          Following a link to GitHub, the Chrome Web Store, or another service takes you to that
+          service, where its own privacy terms apply.
+        </p>
+      </section>
+      <section id="policy">
+        <h2>Read the extension’s full policy.</h2>
+        <p>
+          This page is a readable overview. The{' '}
+          <a href={source('PRIVACY.md')}>extension privacy policy</a>, effective 6 October 2026, is
+          the authoritative document for the extension. It covers storage, sync, files, clipboard,
+          network use, permissions, and deletion.
+        </p>
+        <p>
+          The website overview was reviewed on {release.reviewed}. Changes to extension data
+          handling are recorded in the <a href={source('CHANGELOG.md')}>changelog</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</Base>

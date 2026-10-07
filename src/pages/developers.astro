@@ -1,0 +1,137 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { github, source } from '../data/site';
+---
+
+<Base
+  title="For developers · Ostrilo"
+  description="Connect your Nostr app to Ostrilo with the two core NIP-07 methods: getPublicKey and signEvent. Explore the API, source, tests, and contribution guide."
+>
+  <PageIntro label="For developers" title="Let people bring their own signer.">
+    <p>
+      Ostrilo exposes the core NIP-07 browser interface through <code>window.nostr</code>. Your app
+      requests a public key or a signed event, and the extension handles consent and signing.
+    </p>
+  </PageIntro>
+  <div class="article-layout wrap">
+    <nav class="page-index" aria-label="On this page">
+      <p class="section-label">Build with Ostrilo</p>
+      <a href="#interface">The browser interface</a>
+      <a href="#example">A signing example</a>
+      <a href="#consent">Handle decisions</a>
+      <a href="#contribute">Contribute</a>
+    </nav>
+    <div class="prose">
+      <section id="interface">
+        <h2>Two methods. A familiar interface.</h2>
+        <p>
+          Check that a provider and the methods you need are available. Ostrilo makes the provider
+          available to top-level HTTPS pages.
+        </p>
+        <table class="data-table">
+          <caption class="caption">Current Ostrilo browser methods</caption>
+          <thead>
+            <tr>
+              <th scope="col">Method</th>
+              <th scope="col">What your app receives</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                <code>getPublicKey()</code>
+              </th>
+              <td>The active identity’s public key, as hex, after site consent.</td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <code>signEvent(event)</code>
+              </th>
+              <td>
+                The event with <code>id</code>, <code>pubkey</code>, and <code>sig</code> added.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <a href="https://github.com/nostr-protocol/nips/blob/master/07.md">Read NIP-07</a> ·{' '}
+          <a href={source('src/extension/injected.ts')}>Inspect the provider implementation</a>
+        </p>
+      </section>
+      <section id="example">
+        <h2>Request a signature.</h2>
+        <p>
+          This example runs in your app after a user chooses to connect and publish. Handle
+          rejections in your own interface, and let the user decide when to try again.
+        </p>
+        <pre tabindex="0"><code>const signer = window.nostr;
+if (!signer?.getPublicKey || !signer?.signEvent) &#123;
+  throw new Error('Choose a browser signer to continue.');
+&#125;
+
+const publicKey = await signer.getPublicKey();
+const signedEvent = await signer.signEvent(&#123;
+  kind: 1,
+  created_at: Math.floor(Date.now() / 1000),
+  tags: [],
+  content: 'Hello from my Nostr app.',
+&#125;);
+
+// Your app decides where to publish signedEvent.</code></pre>
+        <p>
+          Ostrilo returns the signed event to your app. Your app chooses where to publish it. Asking
+          for a signature does not itself publish a note.
+        </p>
+      </section>
+      <section id="consent">
+        <h2>A refusal is a normal result.</h2>
+        <p>
+          Your app should handle public-key refusal, denied signing, a locked vault, and rate
+          limits. Avoid repeated requests that turn consent into a stream of prompts.
+        </p>
+        <p>
+          Check individual capabilities as your app’s needs grow. The{' '}
+          <a href={source('docs/rpc-error-codes.md')}>RPC reference</a> and{' '}
+          <a href={source('src/extension/injected.ts')}>provider source</a> are the starting points
+          for integration details. The roadmap tracks additions to protocol support.
+        </p>
+        <div class="plain-note">
+          <p>
+            Local development also needs HTTPS. Use the repository’s{' '}
+            <a href={source('docs/local-https-development.md')}>local HTTPS setup</a> to exercise
+            the real extension boundary.
+          </p>
+        </div>
+      </section>
+      <section id="contribute">
+        <h2>Help make the next version better.</h2>
+        <p>
+          Ostrilo is MIT licensed. Start with the{' '}
+          <a href={source('CONTRIBUTING.md')}>contribution guide</a>, then follow the architecture
+          and development standards. Substantive changes begin with an OpenSpec proposal.
+        </p>
+        <ul>
+          <li>
+            <a href={source('docs/architecture_primer.md')}>Architecture primer</a> for the request
+            and signing layers.
+          </li>
+          <li>
+            <a href={source('docs/development-standards.md')}>Development standards</a> for
+            implementation and verification.
+          </li>
+          <li>
+            <a href={source('docs/agent-loop.md')}>Agent loop</a> for driving real signing journeys.
+          </li>
+          <li>
+            <a href={`${github}/issues`}>Issues</a> for bugs, proposals, and useful feedback.
+          </li>
+        </ul>
+        <p>
+          Documentation, accessibility work, and tests for recovery, refusal, and locking are all
+          useful contributions.
+        </p>
+      </section>
+    </div>
+  </div>
+</Base>

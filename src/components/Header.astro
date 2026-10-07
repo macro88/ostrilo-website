@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import mascot from '../assets/ostrilo.png';
+import { github, navigation, page } from '../data/site';
+import Icon from './Icon.astro';
+const pathname = Astro.url.pathname;
+---
+
+<a class="skip-link" href="#main">
+  Skip to content
+</a>
+<header class="site-header wrap">
+  <a class="wordmark" href={page()} aria-label="Ostrilo home">
+    <Image src={mascot} width={38} height={38} alt="" />
+    <span>Ostrilo</span>
+  </a>
+  <nav aria-label="Main navigation">
+    {navigation.map(({ label, path }) => (
+      <a href={page(path)} aria-current={pathname === page(path) ? 'page' : undefined}>
+        {label}
+      </a>
+    ))}
+  </nav>
+  <div class="header-tools">
+    <a class="github-link" href={github} aria-label="Ostrilo on GitHub">
+      <Icon name="github" />
+    </a>
+    <button
+      class="theme-toggle"
+      type="button"
+      aria-label="Switch to dark theme"
+      aria-pressed="false"
+      data-theme-toggle
+    >
+      <span class="theme-sun">
+        <Icon name="sun" />
+      </span>
+      <span class="theme-moon">
+        <Icon name="moon" />
+      </span>
+    </button>
+    <a class="header-start" href={page('start/')}>
+      Try Ostrilo <Icon name="arrow" />
+    </a>
+  </div>
+</header>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  function updateLabel() {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    toggle?.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
+    toggle?.setAttribute('aria-pressed', String(dark));
+  }
+  updateLabel();
+  toggle?.addEventListener('click', () => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    document.documentElement.dataset.theme = dark ? 'light' : 'dark';
+    updateLabel();
+  });
+  systemTheme.addEventListener('change', ({ matches }) => {
+    document.documentElement.dataset.theme = matches ? 'dark' : 'light';
+    updateLabel();
+  });
+</script>

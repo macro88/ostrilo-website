@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import LinkButton from '../components/LinkButton.astro';
+import { github, release, source } from '../data/site';
+---
+
+<Base
+  title="Get started · Ostrilo"
+  description="Chrome Web Store launch coming soon. Build Ostrilo from source, load it in your browser, and connect your first Nostr website."
+>
+  <PageIntro label="Get started" title="Bring your identity along.">
+    <p>
+      Ostrilo’s Chrome Web Store launch is coming soon. Until then, you can build the extension from
+      source and try the signing flow in your browser.
+    </p>
+    {release.chromeStoreUrl && (
+      <div class="actions">
+        <LinkButton href={release.chromeStoreUrl}>Add to Chrome</LinkButton>
+      </div>
+    )}
+  </PageIntro>
+  <div class="article-layout wrap">
+    <nav class="page-index" aria-label="On this page">
+      <p class="section-label">Build & connect</p>
+      <a href="#build">Build the extension</a>
+      <a href="#install">Load in your browser</a>
+      <a href="#first-use">Your first signing flow</a>
+      <a href="#questions">Common questions</a>
+    </nav>
+    <div class="prose">
+      <section id="build">
+        <h2>Build your own copy.</h2>
+        <p>
+          You’ll need Git, Node.js 22, pnpm 11.5.2, and a desktop browser. These commands build the
+          extension, rather than this website.
+        </p>
+        <pre tabindex="0"><code>git clone https://github.com/macro88/ostrilo.git
+cd ostrilo
+pnpm install --frozen-lockfile
+pnpm run build</code></pre>
+        <p>
+          The extension repository is being prepared for its public release. If it isn’t available
+          yet, check back when the launch is announced.
+        </p>
+        <p>
+          <a href={source('README.md#get-started')}>Full source-build instructions</a>
+        </p>
+      </section>
+      <section id="install">
+        <h2>Load it in your browser.</h2>
+        <div class="compatibility">
+          <div>
+            <span class="status-chip">Chrome & Chromium</span>
+            <h3>Load unpacked</h3>
+            <p>
+              Open <code>chrome://extensions</code>, enable Developer mode, and choose{' '}
+              <strong>Load unpacked</strong>. Select <code>.output/chrome-mv3</code> from your
+              extension checkout, then pin Ostrilo.
+            </p>
+          </div>
+          <div>
+            <span class="status-chip">Firefox development build</span>
+            <h3>Load a temporary add-on</h3>
+            <p>
+              Run <code>pnpm run build:firefox</code>. Open <code>about:debugging</code>, select
+              This Firefox, and load <code>.output/firefox-mv3/manifest.json</code>. Temporary
+              add-ons are removed when Firefox restarts.
+            </p>
+          </div>
+        </div>
+        <p>
+          <a href={source('README.md')}>Browser setup and release details</a>
+        </p>
+      </section>
+      <section id="first-use">
+        <h2>Make your first signing decision.</h2>
+        <ol>
+          <li>
+            <strong>Set up an identity.</strong> Create or import a disposable key while evaluating
+            the source build, and set your vault password.
+          </li>
+          <li>
+            <strong>Keep your backup.</strong> When creating your first identity, save the encrypted
+            onboarding backup and keep its passphrase separately. Preserve an independent copy of
+            any key you import.
+          </li>
+          <li>
+            <strong>Connect a Nostr website.</strong> Choose its browser-extension sign-in option on
+            an HTTPS page. Decide whether it may read your public key.
+          </li>
+          <li>
+            <strong>Review and sign.</strong> Check the website, identity, event kind, and content
+            in Ostrilo. Approve or deny the request, then see your decision in Activity.
+          </li>
+        </ol>
+        <p>
+          <a href={source('docs/key-backup.md')}>Backup guide</a> ·{' '}
+          <a href={source('docs/managing-multiple-keys.md')}>Managing identities</a>
+        </p>
+      </section>
+      <section id="questions" class="faq">
+        <h2>A few useful answers.</h2>
+        <details>
+          <summary>Do I need an Ostrilo account?</summary>
+          <p>
+            No. Your vault lives in the browser. There’s no Ostrilo account or developer server
+            involved in signing.
+          </p>
+        </details>
+        <details>
+          <summary>Can I use a key I already have?</summary>
+          <p>
+            Yes. You can import an existing Nostr private key and keep the same identity. Keep your
+            original recovery copy somewhere safe.
+          </p>
+        </details>
+        <details>
+          <summary>Does the site get my private key?</summary>
+          <p>
+            No. It receives your public key after consent, or a signed event after approval or a
+            matching permission rule.
+          </p>
+        </details>
+        <details>
+          <summary>Can I choose my own relays?</summary>
+          <p>
+            Yes. Manage relay addresses in Ostrilo’s settings. They’re used to look up and publish
+            your Nostr profile.
+          </p>
+        </details>
+        <details>
+          <summary>Where do I send feedback?</summary>
+          <p>
+            Use <a href={`${github}/issues`}>GitHub Issues</a> for bugs and suggestions. Include the
+            browser, extension revision, and steps to reproduce. Use the{' '}
+            <a href={source('SECURITY.md')}>private security process</a> for vulnerabilities.
+          </p>
+        </details>
+      </section>
+    </div>
+  </div>
+</Base>

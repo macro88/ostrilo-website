@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import LinkButton from '../components/LinkButton.astro';
+import { page } from '../data/site';
+---
+
+<Base
+  title="Page not found · Ostrilo"
+  description="This Ostrilo page could not be found. Return to the product page or explore the roadmap."
+>
+  <section class="not-found wrap">
+    <p class="section-label">404 · Page not found</p>
+    <h1>This page has moved on.</h1>
+    <p>
+      There’s no page at this address. Start with the product, or see what’s next on the roadmap.
+    </p>
+    <div class="actions">
+      <LinkButton href={page()}>Back to Ostrilo</LinkButton>
+      <LinkButton href={page('roadmap/')} secondary>
+        See the roadmap
+      </LinkButton>
+    </div>
+  </section>
+</Base>

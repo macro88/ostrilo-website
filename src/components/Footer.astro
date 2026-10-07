@@ -1,0 +1,39 @@
+---
+import { github, page, source } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="footer-brand" href={page()}>
+        Ostrilo
+      </a>
+      <p>A local home for your Nostr keys.</p>
+      <p class="caption">MIT licensed · © 2026 Ostrilo contributors</p>
+    </div>
+    <div>
+      <p class="section-label">Explore</p>
+      <a href={page('start/')}>Get started</a>
+      <a href={page('roadmap/')}>Roadmap</a>
+      <a href={page('developers/')}>Developers</a>
+    </div>
+    <div>
+      <p class="section-label">Trust & privacy</p>
+      <a href={page('security/')}>Security</a>
+      <a href={page('privacy/')}>Privacy</a>
+      <a href={`${github}/security/advisories/new`}>Report a vulnerability</a>
+    </div>
+    <div>
+      <p class="section-label">Open source</p>
+      <a href={github}>GitHub repository</a>
+      <a href={source('CHANGELOG.md')}>Changelog</a>
+      <a href={source('LICENSE')}>MIT license</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>Built for people who want to see what they sign.</span>
+    <a href={source('CONTRIBUTING.md')}>
+      Help build Ostrilo <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</footer>

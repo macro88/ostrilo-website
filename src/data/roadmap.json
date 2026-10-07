@@ -1,0 +1,91 @@
+[
+  {
+    "id": "built",
+    "label": "Built",
+    "title": "The local signer foundation.",
+    "description": "Implemented in the current 0.9.0 codebase. The signing, identity, and permission controls at the heart of Ostrilo.",
+    "items": [
+      {
+        "title": "Sign in and sign events",
+        "body": "NIP-07 getPublicKey and signEvent, background signing, public-key consent, request validation, and a managed approval queue.",
+        "reference": "src/extension/injected.ts"
+      },
+      {
+        "title": "Manage multiple identities",
+        "body": "Create and import keys, rename them, switch your active identity, and delete with password re-verification. Private keys are encrypted locally.",
+        "reference": "docs/managing-multiple-keys.md"
+      },
+      {
+        "title": "Control site permissions",
+        "body": "Per-site trust, event-kind rules, session grants, and protected kinds that always require approval. Signing and disclosure decisions appear in Activity.",
+        "reference": "src/domain/policy/trust-definitions.ts"
+      },
+      {
+        "title": "Lock, recover, and manage profiles",
+        "body": "Manual and automatic locking, master-password changes, an encrypted first-key onboarding backup, profile editing, and configurable relays.",
+        "reference": "README.md"
+      },
+      {
+        "title": "Check the build and signing journeys",
+        "body": "Coverage gates, security tests, Chromium browser tests, Chrome and Firefox builds, bundle checks, dependency audits, and secret scanning.",
+        "reference": "docs/ci-verification.md"
+      }
+    ]
+  },
+  {
+    "id": "next",
+    "label": "Next",
+    "title": "Make the foundation dependable.",
+    "description": "The next steps in recovery, signing clarity, and verification from the source roadmap.",
+    "items": [
+      {
+        "title": "A recovery path for every key",
+        "body": "Backup and export for keys added after onboarding, restore outside onboarding, and clearer import/export options. Make it easier to keep every identity portable.",
+        "reference": "docs/roadmap.md"
+      },
+      {
+        "title": "Independent security review",
+        "body": "Review the vault, signing path, and RPC privilege boundary. Publish the findings. A planned milestone on the path to 1.0.",
+        "reference": "README.md"
+      },
+      {
+        "title": "Further hardening and verification",
+        "body": "Finish sensitive-input isolation and erasure coverage, meter requests that auto-sign, expand accessibility auditing, and work toward reproducible-build checks.",
+        "reference": "docs/roadmap.md"
+      },
+      {
+        "title": "Better approvals and activity",
+        "body": "Parsed event previews and risk information. Improve activity export and filtering, then add search, date ranges, and CSV export.",
+        "reference": "docs/roadmap.md"
+      },
+      {
+        "title": "A clearer developer surface",
+        "body": "Consistent page-facing errors, accurate API documentation, formal TypeScript definitions, capability detection, and versioning guidance.",
+        "reference": "docs/roadmap.md"
+      }
+    ]
+  },
+  {
+    "id": "later",
+    "label": "Later",
+    "title": "Broader Nostr support, deliberately.",
+    "description": "Planned or exploratory work. These are directions, with no promised dates or release numbers.",
+    "items": [
+      {
+        "title": "More protocol depth",
+        "body": "NIP-44 encryption, NIP-42 authentication, NIP-57 validation, NIP-65 relay lists, and NIP-05 verification.",
+        "reference": "docs/roadmap.md"
+      },
+      {
+        "title": "Portable encrypted keys and remote signing",
+        "body": "NIP-49 ncryptsec import, broader standard export formats, and NIP-46 remote signing are roadmap work.",
+        "reference": "docs/roadmap.md"
+      },
+      {
+        "title": "Multi-device and advanced key protection",
+        "body": "Authenticated sync, encrypted device transfer, optional seed recovery, and hardware-backed or biometric options are longer-term directions.",
+        "reference": "docs/roadmap.md"
+      }
+    ]
+  }
+]

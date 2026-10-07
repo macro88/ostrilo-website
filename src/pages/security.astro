@@ -1,0 +1,127 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { github, source } from '../data/site';
+---
+
+<Base
+  title="Security · Ostrilo"
+  description="Local signing, an encrypted vault, explicit site permissions, and source you can inspect. Explore how Ostrilo puts you in control of your Nostr identity."
+>
+  <PageIntro label="Security by design" title="Your key. Your permission.">
+    <p>
+      Ostrilo keeps private keys in an encrypted vault on your device. Websites ask for signatures
+      through the extension, and you decide what they can do.
+    </p>
+  </PageIntro>
+  <div class="article-layout wrap">
+    <nav class="page-index" aria-label="On this page">
+      <p class="section-label">The security model</p>
+      <a href="#vault">Encrypted local vault</a>
+      <a href="#consent">Consent & signing</a>
+      <a href="#locking">Locking & password checks</a>
+      <a href="#recovery">Keeping a backup</a>
+      <a href="#source">Inspect the source</a>
+      <a href="#report">Report a vulnerability</a>
+    </nav>
+    <div class="prose">
+      <section id="vault">
+        <h2>Private keys stay local.</h2>
+        <p>
+          New vaults use Argon2id to derive a key from your master password and AES-256-GCM to
+          encrypt private keys in local extension storage. Keys are not copied into browser sync.
+        </p>
+        <p>
+          Signing happens in the extension’s background context. A website receives your public key
+          or a signed event. It never receives your private key or master password.
+        </p>
+        <p>
+          <a href={source('docs/vault-storage-format.md')}>Explore the vault format</a> ·{' '}
+          <a href={source('docs/rpc-architecture.md')}>See the signing architecture</a>
+        </p>
+      </section>
+      <section id="consent">
+        <h2>Trust is specific to each site.</h2>
+        <p>
+          A site must have your consent to read your public key, even if you’ve given it a high
+          trust level. You can grant or refuse access, and manage that choice later in Permissions.
+        </p>
+        <p>
+          Choose which event kinds a trusted site can sign without a prompt. Text notes, deletion
+          requests, zap requests, and relay or HTTP authentication always require explicit approval.
+        </p>
+        <p>
+          For each approval, Ostrilo shows the requesting origin, signing identity, event kind, and
+          content. That gives you the context to decide before a signature is created.
+        </p>
+        <p>
+          <a href={source('src/domain/policy/trust-definitions.ts')}>Read the trust policy</a>
+        </p>
+      </section>
+      <section id="locking">
+        <h2>Lock when you step away.</h2>
+        <p>
+          Lock your vault manually or set an automatic timeout. Password checks protect sensitive
+          actions such as deleting a key, granting high trust, and changing security timeouts.
+        </p>
+        <p>
+          You can change your master password from Security settings. The extension re-wraps your
+          keys under the new password, with recovery handling for an interrupted change.
+        </p>
+        <p>
+          <a href={source('README.md#trust-and-control')}>Read the detailed security model</a>
+        </p>
+      </section>
+      <section id="recovery">
+        <h2>Keep a copy you can recover.</h2>
+        <p>
+          When creating your first identity during onboarding, save an encrypted backup with a
+          separate passphrase. Restore it through the import step in a fresh installation, then
+          check that the public key matches.
+        </p>
+        <p>
+          Keep the backup and its passphrase separately. Your private key is your identity, so a
+          recoverable copy matters. The <a href={source('docs/key-backup.md')}>backup guide</a>{' '}
+          covers the available flows and what each file contains.
+        </p>
+      </section>
+      <section id="source">
+        <h2>Follow the code, all the way to signing.</h2>
+        <p>
+          Ostrilo is MIT licensed. The source documents how requests move from websites to the
+          extension, how permissions are checked, and where signing happens.
+        </p>
+        <p>
+          Unit, integration, security, and Chromium browser tests exercise the signing journeys. CI
+          checks coverage, builds both browser targets, inspects bundles, audits dependencies, and
+          scans for committed secrets.
+        </p>
+        <p>
+          <a href={source('docs/TESTING.md')}>Explore the test strategy</a> ·{' '}
+          <a href={source('docs/ci-verification.md')}>See the verification workflow</a>
+        </p>
+        <div class="plain-note">
+          <p>
+            For a deeper assessment, the{' '}
+            <a href={source('README.md#trust-and-control')}>source README</a> documents the trust
+            boundaries, browser coverage, and review status.
+          </p>
+        </div>
+      </section>
+      <section id="report">
+        <h2>Help keep signing safe.</h2>
+        <p>
+          Report vulnerabilities through{' '}
+          <a href={`${github}/security/advisories/new`}>GitHub’s private reporting form</a>. Use a
+          disposable identity for reproduction, and keep keys, passphrases, vault files, and
+          unredacted backups out of reports.
+        </p>
+        <p>
+          The <a href={source('SECURITY.md')}>security policy</a> explains how reports and
+          disclosure are handled. If the private form is unavailable, hold the details and check
+          again rather than posting them publicly.
+        </p>
+      </section>
+    </div>
+  </div>
+</Base>

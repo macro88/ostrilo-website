@@ -1,0 +1,195 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import LinkButton from '../components/LinkButton.astro';
+import Icon from '../components/Icon.astro';
+import SigningDemo from '../components/SigningDemo';
+import homeLight from '../assets/home-light.png';
+import homeDark from '../assets/home-dark.png';
+import { github, page } from '../data/site';
+---
+
+<Base
+  title="Ostrilo · Your Nostr keys. Your signing decisions."
+  description="A local Nostr signer for your browser. Manage identities, review signing requests, and choose each site's permissions. MIT licensed. Chrome Web Store launch coming soon."
+>
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="section-label">
+        A local Nostr signer <span class="status-chip">Chrome launch soon</span>
+      </p>
+      <h1>
+        Your Nostr keys.<span>Your signing decisions.</span>
+      </h1>
+      <p class="lede">
+        Sign in to Nostr websites without handing them your private key. Keep your identities in one
+        encrypted browser vault, see what a site is asking for, and choose what gets signed.
+      </p>
+      <div class="actions">
+        <LinkButton href={page('start/')}>Try Ostrilo</LinkButton>
+        <LinkButton href={github} secondary>
+          Explore the source
+        </LinkButton>
+      </div>
+      <p class="hero-note">Chrome Web Store launch coming soon. Build from source today.</p>
+    </div>
+    <SigningDemo client:visible />
+  </section>
+  <div class="principle-strip wrap">
+    <div>
+      <strong>Local signing</strong>
+      <span>Keys stay in the extension</span>
+    </div>
+    <div>
+      <strong>Site-by-site consent</strong>
+      <span>Your identity, your permissions</span>
+    </div>
+    <div>
+      <strong>MIT licensed</strong>
+      <span>Read it. Build it. Change it.</span>
+    </div>
+  </div>
+  <section class="product-section wrap" aria-labelledby="workflow-title">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">The signing flow</p>
+        <h2 id="workflow-title">Your identity goes with you.</h2>
+      </div>
+      <p>
+        Your Nostr identity is a key pair. Ostrilo holds the private key and lets compatible
+        websites request a public key or a signature through your browser.
+      </p>
+    </div>
+    <ol class="workflow">
+      <li>
+        <span class="step">01 · Connect</span>
+        <h3>Choose who sees your identity.</h3>
+        <p>
+          A website asks for your public key. Ostrilo asks for your consent for that site, even when
+          it has a high trust level. You can refuse.
+        </p>
+      </li>
+      <li>
+        <span class="step">02 · Review</span>
+        <h3>Read what you’re signing.</h3>
+        <p>
+          Check the requesting site, signing identity, event kind, and content. Text notes,
+          deletions, zap requests, and relay or HTTP authentication always need approval.
+        </p>
+      </li>
+      <li>
+        <span class="step">03 · Decide</span>
+        <h3>Approve it. Or don’t.</h3>
+        <p>
+          Approved events are signed locally and returned to the website. Your private key stays in
+          the extension. A signature lets the site act as you, so the decision matters.
+        </p>
+      </li>
+    </ol>
+  </section>
+  <section class="product-panel" aria-labelledby="identities-title">
+    <div class="wrap">
+      <div>
+        <p class="section-label">Built for everyday Nostr</p>
+        <h2 id="identities-title">
+          Room for more than
+          <br />
+          one side of you.
+        </h2>
+        <ul class="feature-list">
+          <li>
+            <strong>Keep identities separate.</strong>
+            <p>Create or import keys, give them useful names, and choose your active identity.</p>
+          </li>
+          <li>
+            <strong>Make trust a deliberate choice.</strong>
+            <p>
+              Manage permissions for each site and event kind. Allow selected routine events from a
+              trusted site while protected kinds still ask for approval.
+            </p>
+          </li>
+          <li>
+            <strong>See the decisions you’ve made.</strong>
+            <p>
+              Review signing and public-key disclosure in Activity. Manage your profiles, relays,
+              and security settings in the full options page.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <figure class="real-product">
+        <Image
+          class="shot-light"
+          src={homeLight}
+          width={400}
+          height={600}
+          alt="Ostrilo's populated home: two keys, three relays, site permissions, and signed and denied activity"
+          loading="lazy"
+        />
+        <Image
+          class="shot-dark"
+          src={homeDark}
+          width={400}
+          height={600}
+          alt="Ostrilo's populated home in the Deep Ink theme, with identity controls and signing activity"
+          loading="lazy"
+        />
+        <figcaption class="caption">
+          The actual extension, with example identities and real signing activity.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="product-section trust-section wrap" aria-labelledby="trust-title">
+    <div>
+      <p class="section-label">Trust you can examine</p>
+      <h2 id="trust-title">
+        Local by design.
+        <br />
+        Open to inspection.
+      </h2>
+      <p>
+        Your identity deserves a tool you can understand. Ostrilo keeps private keys in your browser
+        and puts the source, permissions, and signing policy where you can inspect them.
+      </p>
+      <a class="text-link" href={page('security/')}>
+        Read the security model <Icon name="arrow" />
+      </a>
+    </div>
+    <ul class="trust-list">
+      <li>
+        <h3>Encrypted where it counts.</h3>
+        <p>
+          Private keys are encrypted at rest. Signing runs in the extension’s background context.
+        </p>
+      </li>
+      <li>
+        <h3>No data sent to the developer.</h3>
+        <p>
+          The extension has no analytics, telemetry, or crash reporting. You choose the relays used
+          for your Nostr profiles.
+        </p>
+      </li>
+      <li>
+        <h3>Yours to build on.</h3>
+        <p>
+          MIT licensed, with a readable codebase and documented signing policy. Build your own copy,
+          contribute a change, or maintain a fork.
+        </p>
+      </li>
+    </ul>
+  </section>
+  <section class="launch-panel wrap">
+    <div>
+      <p class="section-label">Built in the open · MIT</p>
+      <h2>Help shape what comes next.</h2>
+      <p>
+        From everyday signing to broader Nostr support, Ostrilo is growing in the open. Explore
+        what’s built and what we’re working toward.
+      </p>
+    </div>
+    <LinkButton href={page('roadmap/')} secondary>
+      See the roadmap
+    </LinkButton>
+  </section>
+</Base>

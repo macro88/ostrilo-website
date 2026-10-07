@@ -1,0 +1,8 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+minimumReleaseAge: 1440
+trustPolicy: no-downgrade
+overrides:
+  chokidar: '5.0.0'
+  semver: '7.8.5'

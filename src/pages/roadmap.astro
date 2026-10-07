@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import LinkButton from '../components/LinkButton.astro';
+import roadmap from '../data/roadmap.json';
+import { github, release, source } from '../data/site';
+---
+
+<Base
+  title="Roadmap · Ostrilo"
+  description="What Ostrilo has built, the next steps, and the future of its Nostr protocol support. Clear status, source links, and no invented delivery dates."
+>
+  <PageIntro label="The roadmap" title="Here’s where Ostrilo stands.">
+    <p>
+      The core signer is built. Next come better recovery, deeper protocol support, and more ways to
+      use your identity. This is the readable view of our source roadmap.
+    </p>
+  </PageIntro>
+  <div class="wrap">
+    <div class="roadmap-intro">
+      <p>
+        Current extension <code>{release.version}</code> · Pre-1.0
+      </p>
+      <p>Reviewed {release.reviewed}</p>
+      <p>
+        <a href={source('docs/roadmap.md')}>
+          Full technical roadmap <span aria-hidden="true">↗</span>
+        </a>
+      </p>
+    </div>
+    {roadmap.map((group) => (
+      <section class="roadmap-group" id={group.id} aria-labelledby={`${group.id}-title`}>
+        <header>
+          <span
+            class:list={['status-chip', { built: group.id === 'built', next: group.id === 'next' }]}
+          >
+            {group.label}
+          </span>
+          <h2 id={`${group.id}-title`}>{group.title}</h2>
+          <p>{group.description}</p>
+        </header>
+        <ul class="roadmap-items">
+          {group.items.map((item) => (
+            <li>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              <a href={source(item.reference)}>
+                View source detail <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+    <section class="roadmap-end">
+      <h2>Help with the part you care about.</h2>
+      <p>
+        Useful contributions include recovery testing, accessibility findings, documentation
+        corrections, and tests for refusal and locking. The technical roadmap contains more ideas
+        than this page. Priorities can evolve as people use and contribute to Ostrilo.
+      </p>
+      <div class="actions">
+        <LinkButton href={source('CONTRIBUTING.md')}>Read the contribution guide</LinkButton>
+        <LinkButton href={`${github}/issues`} secondary>
+          Discuss an issue
+        </LinkButton>
+      </div>
+    </section>
+  </div>
+</Base>
