@@ -59,3 +59,8 @@ The full 27-test suite also passes with a fresh production server and
 canonical URLs, and crawler endpoints work under the repository prefix.
 Playwright starts Astro preview in the foreground with `--ignore-lock` so
 agent-environment background startup cannot escape its server lifecycle.
+
+The walkthrough transfers focus to the result heading after a decision and back
+to its title on reset, so keyboard users retain their place. JavaScript-only
+buttons are hidden when JavaScript is disabled; the product explanation and
+native links remain available.

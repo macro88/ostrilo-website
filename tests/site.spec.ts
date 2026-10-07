@@ -45,10 +45,13 @@ test('walkthrough approves, denies, resets, and exposes example JSON', async ({ 
   await page.goto('./');
   await page.getByRole('button', { name: 'Approve example' }).click();
   await expect(page.getByText('You approved this note.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'You approved this note.' })).toBeFocused();
   await expect(page.getByText('This walkthrough creates no keys or signatures.')).toBeVisible();
   await page.getByRole('button', { name: 'Try the other decision' }).click();
+  await expect(page.locator('#demo-title')).toBeFocused();
   await page.getByRole('button', { name: 'Deny', exact: true }).click();
   await expect(page.getByText('You denied this request.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'You denied this request.' })).toBeFocused();
   await page.getByRole('button', { name: 'Try the other decision' }).click();
   await page.getByText('View example event').click();
   await expect(page.locator('.demo-json pre')).toContainText('"kind": 1');

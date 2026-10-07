@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 type Decision = 'pending' | 'approved' | 'denied';
 
@@ -15,7 +15,9 @@ function DecisionResult({
       <span className={`result-seal ${approved ? 'success' : 'refused'}`} aria-hidden="true">
         {approved ? '✓' : '×'}
       </span>
-      <h3>{approved ? 'You approved this note.' : 'You denied this request.'}</h3>
+      <h3 tabIndex={-1} ref={(heading) => heading?.focus()}>
+        {approved ? 'You approved this note.' : 'You denied this request.'}
+      </h3>
       <p>
         {approved
           ? 'In Ostrilo, signing happens locally. The website receives a signed event and can publish it as you.'
@@ -83,6 +85,11 @@ function RequestDetails() {
 
 export default function SigningDemo() {
   const [decision, setDecision] = useState<Decision>('pending');
+  const title = useRef<HTMLHeadingElement>(null);
+  function reset() {
+    setDecision('pending');
+    title.current?.focus();
+  }
   return (
     <section className="signing-demo" aria-labelledby="demo-title">
       <div className="demo-heading">
@@ -90,7 +97,9 @@ export default function SigningDemo() {
         <span className="demo-local">Example data only</span>
       </div>
       <div className="demo-title">
-        <h2 id="demo-title">A signature starts with your say.</h2>
+        <h2 id="demo-title" tabIndex={-1} ref={title}>
+          A signature starts with your say.
+        </h2>
         <p>See the request. Make the call.</p>
       </div>
       <div className="demo-request" aria-live="polite">
@@ -116,7 +125,7 @@ export default function SigningDemo() {
             <p className="demo-footnote">No extension connection. No real signing.</p>
           </>
         ) : (
-          <DecisionResult decision={decision} reset={() => setDecision('pending')} />
+          <DecisionResult decision={decision} reset={reset} />
         )}
       </div>
     </section>
