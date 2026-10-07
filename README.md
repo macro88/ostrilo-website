@@ -72,12 +72,24 @@ Before the first remote deployment:
 1. Create the public `macro88/ostrilo-website` repository and push this local
    `main` when ready.
 2. Set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**.
-3. Set the custom domain to `ostrilo.com`, configure its GitHub Pages DNS records,
-   and enable HTTPS after domain validation.
+3. Verify domain ownership in GitHub's account Pages settings, then set the
+   repository's Pages custom domain to `ostrilo.com` before changing DNS.
+4. Configure the apex domain with an ALIAS/ANAME to `macro88.github.io` or the
+   four GitHub Pages A records: `185.199.108.153`, `185.199.109.153`,
+   `185.199.110.153`, and `185.199.111.153`. For `www`, use a CNAME pointing to
+   `macro88.github.io`. Enable **Enforce HTTPS** after domain validation.
+5. Confirm that both workflow jobs succeed and check the live site on mobile
+   and desktop, including navigation, GitHub links, the signing walkthrough,
+   social preview, sitemap, and HTTPS redirect.
+
+See GitHub's [custom-domain instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+for current DNS values and domain verification. DNS and certificate provisioning
+can take up to 24 hours.
 
 The build defaults to `SITE_URL=https://ostrilo.com` and `SITE_BASE=/`, with
-`public/CNAME` carrying the domain. Canonical, social, sitemap, and local URLs
-derive from that configuration.
+`public/CNAME` documenting the intended domain. GitHub Actions deployments ignore
+that file: the custom domain must be saved in Pages settings. Canonical, social,
+sitemap, and local URLs derive from the build configuration.
 
 For a temporary repository-path deployment, remove `public/CNAME` and set the
 repository variables `SITE_URL=https://macro88.github.io` and

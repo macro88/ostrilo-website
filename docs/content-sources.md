@@ -54,4 +54,4 @@ flow, clarity, reader value, and prose patterns. No testimonials, audit badge,
 user counts, delivery dates, or unsupported compatibility claims were invented.
 The product copy explains signing control and identity management, while the
 roadmap labels future work. Security and privacy pages link technical detail.
-Editorial review is part of the website publication process.
+The rendered website was reviewed and accepted before publication setup.
