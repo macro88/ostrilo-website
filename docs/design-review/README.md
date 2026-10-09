@@ -64,3 +64,23 @@ The walkthrough transfers focus to the result heading after a decision and back
 to its title on reset, so keyboard users retain their place. JavaScript-only
 buttons are hidden when JavaScript is disabled; the product explanation and
 native links remain available.
+
+## Chrome Web Store launch update · 9 October 2026
+
+The homepage now links directly to the published store listing. Its status,
+description metadata, and installation note announce availability. Getting
+started leads with store installation and normal identity setup, followed by
+source-build and Firefox development instructions. The header uses “Get Ostrilo”
+and keeps the guided installation page available throughout the site.
+
+Reviewed both themes at 390px and 1440px against the production build, retaining
+the populated extension images. The new status chip, buttons, page index, and
+installation steps fit without overflow or clipping. A final interaction check
+caught missing whitespace before the installation button name; explicit spacing
+now preserves the instruction in rendered HTML.
+
+All 27 browser tests pass in Chromium, Firefox, and WebKit, including the existing
+accessibility and no-JavaScript checks. The exact store destination and updated
+description/Open Graph metadata were also checked with and without JavaScript.
+Both pinned quality tools remain at 100/100; Astro Check, formatting, production
+build, dependency audit, and the production secret scan pass.

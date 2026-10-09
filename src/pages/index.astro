@@ -6,17 +6,17 @@ import Icon from '../components/Icon.astro';
 import SigningDemo from '../components/SigningDemo';
 import homeLight from '../assets/home-light.png';
 import homeDark from '../assets/home-dark.png';
-import { github, page } from '../data/site';
+import { github, page, release } from '../data/site';
 ---
 
 <Base
   title="Ostrilo · Your Nostr keys. Your signing decisions."
-  description="A local Nostr signer for your browser. Manage identities, review signing requests, and choose each site's permissions. MIT licensed. Chrome Web Store launch coming soon."
+  description="A local Nostr signer for your browser. Manage identities, review signing requests, and control site permissions. MIT licensed. Available in the Chrome Web Store."
 >
   <section class="hero wrap">
     <div class="hero-copy">
       <p class="section-label">
-        A local Nostr signer <span class="status-chip">Chrome launch soon</span>
+        A local Nostr signer <span class="status-chip">Available for Chrome</span>
       </p>
       <h1>
         Your Nostr keys.<span>Your signing decisions.</span>
@@ -26,12 +26,12 @@ import { github, page } from '../data/site';
         encrypted browser vault, see what a site is asking for, and choose what gets signed.
       </p>
       <div class="actions">
-        <LinkButton href={page('start/')}>Try Ostrilo</LinkButton>
+        <LinkButton href={release.chromeStoreUrl}>Add to Chrome</LinkButton>
         <LinkButton href={github} secondary>
           Explore the source
         </LinkButton>
       </div>
-      <p class="hero-note">Chrome Web Store launch coming soon. Build from source today.</p>
+      <p class="hero-note">Available in the Chrome Web Store. No Ostrilo account needed.</p>
     </div>
     <SigningDemo client:visible />
   </section>

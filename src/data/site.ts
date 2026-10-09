@@ -2,7 +2,8 @@ export const release = {
   version: '0.9.0',
   reviewed: '7 October 2026',
   revision: 'd70a0c1e83087a4db6593fc8658912f70767fd6c',
-  chromeStoreUrl: null as string | null,
+  chromeStoreUrl:
+    'https://chromewebstore.google.com/detail/ostrilo/nhodljdjlljpapclgcjmhajpgodanchk',
 };
 
 export const github = 'https://github.com/macro88/ostrilo';

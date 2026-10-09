@@ -53,10 +53,11 @@ See [content sources](docs/content-sources.md) before updating claims.
 `src/data/site.ts` holds the reviewed extension version and launch URL.
 `src/data/roadmap.json` holds the source-backed built/next/later groups.
 
-The site currently announces the Chrome Web Store launch as coming soon. When
-the listing is live, set `release.chromeStoreUrl` to the verified HTTPS listing,
-update the launch copy in the home and start pages, and refresh the release
-metadata. Do not invent a listing URL or ship an inactive installation button.
+Ostrilo 0.9.0 is available in the
+[Chrome Web Store](https://chromewebstore.google.com/detail/ostrilo/nhodljdjlljpapclgcjmhajpgodanchk),
+published on 9 October 2026. The homepage and getting-started page use the listing
+URL from `release.chromeStoreUrl`. Keep that URL and the reviewed release metadata
+current when releases change.
 
 The browser walkthrough is example data only. It never connects to `window.nostr`,
 generates keys, or signs an event. The original mascot, social preview, and
@@ -104,10 +105,9 @@ CI uses commit-pinned actions, a frozen lockfile, formatting, type checks, the
 production build, all three browsers, both quality floors, and an audit blocking
 high and critical findings. Only the deploy job has Pages write permissions.
 
-Source repositories and GitHub documentation links point to their intended public
-locations. The extension is being prepared for public release, so some links may
-require access until its repository is public. Repository settings, DNS, and live
-deployment are external setup steps, not confirmed by a local build.
+The extension repository and its documentation links are public. Repository
+settings, DNS, and live deployment are external setup steps, not confirmed by a
+local build.
 
 ## License
 

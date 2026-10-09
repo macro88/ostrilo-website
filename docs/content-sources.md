@@ -6,10 +6,17 @@ The website is an independent repository. It does not read private extension
 files or fetch product metadata at build time. Refresh the release metadata in
 `src/data/site.ts` together with content when the extension changes.
 
-The first site is pre-launch, uses `ostrilo.com`, and will live at
-`macro88/ostrilo-website`. The public roadmap follows the extension's
+The site uses `ostrilo.com` and lives at `macro88/ostrilo-website`. The public
+roadmap follows the extension's
 `docs/roadmap.md`. The site is promotional: lead with useful capabilities,
 keep unfinished work on the roadmap, and avoid repeating readiness caveats.
+
+Ostrilo 0.9.0 was published in the
+[Chrome Web Store](https://chromewebstore.google.com/detail/ostrilo/nhodljdjlljpapclgcjmhajpgodanchk)
+on 9 October 2026. The public listing and extension repository visibility were
+verified that day. Installation copy leads with the store release, with source
+builds available as an alternative. The product source review above remains
+the basis for capability claims.
 
 ## Claims and provenance
 

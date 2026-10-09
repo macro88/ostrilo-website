@@ -7,48 +7,74 @@ import { github, release, source } from '../data/site';
 
 <Base
   title="Get started · Ostrilo"
-  description="Chrome Web Store launch coming soon. Build Ostrilo from source, load it in your browser, and connect your first Nostr website."
+  description="Install Ostrilo from the Chrome Web Store, set up your Nostr identity, and connect your first website. Source-build instructions are available too."
 >
   <PageIntro label="Get started" title="Bring your identity along.">
     <p>
-      Ostrilo’s Chrome Web Store launch is coming soon. Until then, you can build the extension from
-      source and try the signing flow in your browser.
+      Add Ostrilo from the Chrome Web Store, set up your identity, and choose what your Nostr
+      websites can sign.
     </p>
-    {release.chromeStoreUrl && (
-      <div class="actions">
-        <LinkButton href={release.chromeStoreUrl}>Add to Chrome</LinkButton>
-      </div>
-    )}
+    <div class="actions">
+      <LinkButton href={release.chromeStoreUrl}>Add to Chrome</LinkButton>
+    </div>
   </PageIntro>
   <div class="article-layout wrap">
     <nav class="page-index" aria-label="On this page">
-      <p class="section-label">Build & connect</p>
-      <a href="#build">Build the extension</a>
-      <a href="#install">Load in your browser</a>
+      <p class="section-label">Install & connect</p>
+      <a href="#install">Install from the store</a>
       <a href="#first-use">Your first signing flow</a>
+      <a href="#build">Build from source</a>
       <a href="#questions">Common questions</a>
     </nav>
     <div class="prose">
+      <section id="install">
+        <h2>Add Ostrilo to Chrome.</h2>
+        <ol>
+          <li>
+            Open <a href={release.chromeStoreUrl}>Ostrilo in the Chrome Web Store</a> and choose{' '}
+            <strong>Add to Chrome</strong>.
+          </li>
+          <li>Confirm the installation when Chrome asks.</li>
+          <li>Open Chrome’s Extensions menu, pin Ostrilo, and select its icon to get started.</li>
+        </ol>
+        <p>Your identity stays in a local browser vault. You don’t need an Ostrilo account.</p>
+      </section>
+      <section id="first-use">
+        <h2>Make your first signing decision.</h2>
+        <ol>
+          <li>
+            <strong>Set up an identity.</strong> Create a new key or import your existing Nostr
+            identity, then set your vault password.
+          </li>
+          <li>
+            <strong>Keep your backup.</strong> When creating your first identity, save the encrypted
+            onboarding backup and keep its passphrase separately. Preserve an independent copy of
+            any key you import.
+          </li>
+          <li>
+            <strong>Connect a Nostr website.</strong> Choose its browser-extension sign-in option on
+            an HTTPS page. Decide whether it may read your public key.
+          </li>
+          <li>
+            <strong>Review and sign.</strong> Check the website, identity, event kind, and content
+            in Ostrilo. Approve or deny the request, then see your decision in Activity.
+          </li>
+        </ol>
+        <p>
+          <a href={source('docs/key-backup.md')}>Backup guide</a> ·{' '}
+          <a href={source('docs/managing-multiple-keys.md')}>Managing identities</a>
+        </p>
+      </section>
       <section id="build">
         <h2>Build your own copy.</h2>
         <p>
-          You’ll need Git, Node.js 22, pnpm 11.5.2, and a desktop browser. These commands build the
-          extension, rather than this website.
+          Prefer to build from source? You’ll need Git, Node.js 22, pnpm 11.5.2, and a desktop
+          browser. These commands build the extension, rather than this website.
         </p>
         <pre tabindex="0"><code>git clone https://github.com/macro88/ostrilo.git
 cd ostrilo
 pnpm install --frozen-lockfile
 pnpm run build</code></pre>
-        <p>
-          The extension repository is being prepared for its public release. If it isn’t available
-          yet, check back when the launch is announced.
-        </p>
-        <p>
-          <a href={source('README.md#get-started')}>Full source-build instructions</a>
-        </p>
-      </section>
-      <section id="install">
-        <h2>Load it in your browser.</h2>
         <div class="compatibility">
           <div>
             <span class="status-chip">Chrome & Chromium</span>
@@ -70,33 +96,7 @@ pnpm run build</code></pre>
           </div>
         </div>
         <p>
-          <a href={source('README.md')}>Browser setup and release details</a>
-        </p>
-      </section>
-      <section id="first-use">
-        <h2>Make your first signing decision.</h2>
-        <ol>
-          <li>
-            <strong>Set up an identity.</strong> Create or import a disposable key while evaluating
-            the source build, and set your vault password.
-          </li>
-          <li>
-            <strong>Keep your backup.</strong> When creating your first identity, save the encrypted
-            onboarding backup and keep its passphrase separately. Preserve an independent copy of
-            any key you import.
-          </li>
-          <li>
-            <strong>Connect a Nostr website.</strong> Choose its browser-extension sign-in option on
-            an HTTPS page. Decide whether it may read your public key.
-          </li>
-          <li>
-            <strong>Review and sign.</strong> Check the website, identity, event kind, and content
-            in Ostrilo. Approve or deny the request, then see your decision in Activity.
-          </li>
-        </ol>
-        <p>
-          <a href={source('docs/key-backup.md')}>Backup guide</a> ·{' '}
-          <a href={source('docs/managing-multiple-keys.md')}>Managing identities</a>
+          <a href={source('README.md#build-from-source')}>Full source-build instructions</a>
         </p>
       </section>
       <section id="questions" class="faq">
