@@ -67,6 +67,8 @@ populated extension captures are bundled locally. Fonts are bundled too.
 
 The workflow verifies pull requests and pushes to `main`. A successful main build
 publishes its `dist` artifact to GitHub Pages. PRs cannot publish.
+The artifact packaging step preserves `/.well-known/` files, which the default
+Pages artifact action excludes.
 
 Before the first remote deployment:
 
