@@ -151,3 +151,17 @@ test('internal destinations, anchors, and crawler metadata resolve', async ({ pa
   const robots = await request.get('./robots.txt');
   expect(await robots.text()).toContain('Sitemap:');
 });
+
+test('NIP-05 resolves the official Ostrilo identity without redirects', async ({ request }) => {
+  const response = await request.get('./.well-known/nostr.json?name=ostrilo', {
+    maxRedirects: 0,
+  });
+
+  expect(response.status()).toBe(200);
+  expect(response.headers()['content-type']).toContain('application/json');
+  expect(await response.json()).toEqual({
+    names: {
+      ostrilo: '4843662eb63767f2a5baaa5308238add705de94a5989a470f09107a354ccdf9e',
+    },
+  });
+});

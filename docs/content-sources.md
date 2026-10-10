@@ -41,6 +41,7 @@ Use the policy for this specific behavior. Do not copy the older image claims.
 ## External primary references
 
 - [NIP-07](https://github.com/nostr-protocol/nips/blob/master/07.md), checked for the browser-provider contract.
+- [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md), checked for the public name-to-key response format.
 - [Astro on GitHub Pages](https://docs.astro.build/en/guides/deploy/github/), checked for static deployment and base paths.
 - [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), checked for artifact and deployment permissions.
 - [GitHub privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement), linked for the hosting provider's data handling.
